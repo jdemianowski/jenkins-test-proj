@@ -46,9 +46,9 @@ pipeline {
 		always {
 			echo "Always print this"
 		}
-		// success {
-		// 	echo "Success"
-		// }
+		success {
+			echo "Success"
+		}
 		// failure {
 		// 	echo "Failure"
 		// }
