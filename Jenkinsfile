@@ -39,6 +39,19 @@ pipeline {
 			steps {
 				echo "Integration test"
 			}
+		} 
+	}
+	
+ post {
+		always {
+			echo "Always print this"
+		}
+		success {
+			echo "Success"
+		}
+		failure {
+			echo "Failure"
 		}
 	}
+
 }
