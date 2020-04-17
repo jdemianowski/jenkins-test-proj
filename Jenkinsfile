@@ -41,17 +41,17 @@ pipeline {
 			}
 		} 
 	}
-	
+
  post {
 		always {
 			echo "Always print this"
 		}
-		success {
-			echo "Success"
-		}
-		failure {
-			echo "Failure"
-		}
+		// success {
+		// 	echo "Success"
+		// }
+		// failure {
+		// 	echo "Failure"
+		// }
 	}
 
 }
