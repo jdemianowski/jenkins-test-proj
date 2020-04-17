@@ -1,7 +1,7 @@
 pipeline {
 	agent {
 		docker {
-			image 'maven:3.6.3'
+			image 'maven:3-jdk-8'
 		}
 	}
 	environment {
@@ -21,16 +21,16 @@ pipeline {
 				sh "mvn clean compile"
 			}
 		}
-		stage('Test') {
-			steps {
-				sh "mvn test"
-			}
-		}
-		stage('Integration test') {
-			steps {
-				sh "mvn failsafe:integration-test failsafe:verify"
-			}
-		}
+		// stage('Test') {
+		// 	steps {
+		// 		sh "mvn test"
+		// 	}
+		// }
+		// stage('Integration test') {
+		// 	steps {
+		// 		sh "mvn failsafe:integration-test failsafe:verify"
+		// 	}
+		// }
 		stage('Package') {
 			steps {
 				sh "mvn package -DskipTests"
