@@ -49,9 +49,9 @@ pipeline {
 		success {
 			echo "Success"
 		}
-		// failure {
-		// 	echo "Failure"
-		// }
+		failure {
+			echo "Failure"
+		}
 	}
 
 }
