@@ -35,14 +35,14 @@ pipeline {
 		stage('Build Docker image') {
 			steps {
 				script {
-					def dockerImage = docker.build("kdemianowski/currency-exchange-devops-jenkins:${env.BUILD_TAG}");
+					dockerImage = docker.build("kdemianowski/currency-exchange-devops-jenkins:${env.BUILD_TAG}");
 				}
 			}
 		}
 		stage('Push Docker image') {
 			steps {
 				script{
-					docker.withRegistry('', 'dockerhub'){
+					docker.withRegistry('', 'dockerhub') {
 						dockerImage.push();
 						dockerImage.push('latest');
 					}
