@@ -35,7 +35,7 @@ pipeline {
 		stage('Build Docker image') {
 			steps {
 				script {
-					def dockerImage = docker.build("kdemianowski/currency-exchange-devops-jenkins:{$env.BUILD_TAG}");
+					def dockerImage = docker.build("kdemianowski/currency-exchange-devops-jenkins:${env.BUILD_TAG}");
 				}
 			}
 		}
