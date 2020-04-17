@@ -1,45 +1,15 @@
-// SCRIPTED
-
-// node {
-// 	stage('Build') {
-// 		echo "Build"
-// 	}
-// 	stage('Test') {
-// 		echo "Test"
-// 	}
-// 	stage('Integration Test') {
-// 		echo "Test"
-// 	}
-// }
-
-
-// node {
-// 	echo "Build"
-// 	echo "Test"
-// 	echo "Test"
-// }
-
-
-// DECLARATIVE
-
 pipeline {
 	agent any
-	// agent {
-	// 	docker {
-	// 		image 'maven:3.6.3'
-	// 	}
-	// }
+	environment {
+		dockerHome = tool 'myDocker'
+		mavenHome = tool 'myMaven'
+		PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
+	}
 	stages {
 		stage('Build') {
 			steps {
-				// sh 'mvn --version'
-				echo "Build"
-				echo "PATH: $PATH"
-				echo "BUILD_ID: $env.BUILD_ID"
-				echo "BUILD_NUMBER: $env.BUILD_NUMBER"
-				echo "BUILD_TAG: $env.BUILD_TAG"
-				echo "JOB_NAME: $env.JOB_NAME"
-				echo "WORKSPACE: $env.WORKSPACE"
+				sh 'mvn --version'
+				sh 'docker version'
 			}
 		}
 		stage('Test') {
@@ -53,19 +23,4 @@ pipeline {
 			}
 		} 
 	}
-	post {
-			always {
-				echo "Always print this"
-			}
-			success {
-				echo "Success"
-			}
-			failure {
-				echo "Failure"
-			}
-			changed {
-				echo "The status has changed in comparison to the previous build"
-			}
-		}
-
 }
