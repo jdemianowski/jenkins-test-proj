@@ -4,11 +4,11 @@ pipeline {
 			image 'maven:3-jdk-8'
 		}
 	}
-	environment {
-		dockerHome = tool 'myDocker'
-		mavenHome = tool 'myMaven'
-		PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
-	}
+	// environment {
+	// 	dockerHome = tool 'myDocker'
+	// 	mavenHome = tool 'myMaven'
+	// 	PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
+	// }
 	stages {
 		stage('Checkout') {
 			steps {
@@ -36,22 +36,22 @@ pipeline {
 				sh "mvn package -DskipTests"
 			}
 		}
-		stage('Build Docker image') {
-			steps {
-				script {
-					dockerImage = docker.build("kdemianowski/currency-exchange-devops-jenkins:${env.BUILD_TAG}");
-				}
-			}
-		}
-		stage('Push Docker image') {
-			steps {
-				script{
-					docker.withRegistry('', 'dockerhub') {
-						dockerImage.push();
-						dockerImage.push('latest');
-					}
-				}
-			}
-		}
+		// stage('Build Docker image') {
+		// 	steps {
+		// 		script {
+		// 			dockerImage = docker.build("kdemianowski/currency-exchange-devops-jenkins:${env.BUILD_TAG}");
+		// 		}
+		// 	}
+		// }
+		// stage('Push Docker image') {
+		// 	steps {
+		// 		script{
+		// 			docker.withRegistry('', 'dockerhub') {
+		// 				dockerImage.push();
+		// 				dockerImage.push('latest');
+		// 			}
+		// 		}
+		// 	}
+		// }
 	}
 }
